@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blank Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>rEDES</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa fa-child"></i><span>Introducción</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="http_dns.html"><i class="fa fa-internet-explorer"></i><span>WEB, DHCP, DNS</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="https_cert.html"><i class="fas fa-table"></i><span>HTTPS</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="DO.html"><i class="fas fa-window-maximize"></i><span>DO1/DO2&nbsp;</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="blank.html"><i class="fa fa-tachometer"></i><span>PRTG</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="Zabbix.html"><i class="fa fa-tachometer"></i><span>ZABBIX</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
+                </nav>
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-1"></h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Introducción&nbsp;</h4>
+                            <p class="card-text">El presente detalla la instalación y configuración del Appliance de Zabbix (v.5.4) para el monitoreo de red implementado por el equipo de Internet y Monitoreo para el proyecto final de la materia “Aplicaciones de redes de computadoras”. Zabbix es un sistema para monitorear la capacidad, el rendimiento y la disponibilidad de los servidores, equipos, aplicaciones y bases de datos. Además, Zabbix también ofrece características avanzadas de monitoreo, alertas y visualización, que incluso, algunas de las mejores aplicaciones comerciales de este tipo no ofrecen. El monitoreo se llevo a cabo por medio de agentes de Zabbix (Zabbix agent) y el servicio de SNMP (Simple Network Management Protocol). Con Zabbix se esta monitoreando la red derecha (VLAN 201) para todo servidor Debian o de pfSense.&nbsp;<br>Lo que se busco monitorear por medio de Zabbix fue lo siguiente:&nbsp;<br><strong>-&nbsp;&nbsp;Uptime</strong><br><strong>-&nbsp;&nbsp;Uso de CPU</strong><br><strong>-&nbsp;&nbsp;Memoria disponible</strong><br><strong>-&nbsp;&nbsp;Espacio en disco disponible</strong><br><strong>-&nbsp;&nbsp;Trafico de cada adaptador de red (Ancho de banda)</strong><br><br>También se lleva a cabo un monitoreo de los siguientes servicios (si es aplicable para dicho host):&nbsp;<br><strong>-&nbsp;&nbsp;HTTP</strong><br><strong>-&nbsp;&nbsp;SSH</strong><br><strong>-&nbsp;&nbsp;HTTPS</strong><br><strong>-&nbsp;&nbsp;DNS</strong><br><strong>-&nbsp;&nbsp;freeRadius</strong><br><strong>-&nbsp;&nbsp;SMTP</strong><br><strong>-&nbsp;&nbsp;POP3</strong><br><strong>-&nbsp;&nbsp;IMAP</strong><br>Para el monitoreo de estos servicios y obtención de dichos datos, Zabbix cuenta con los llamados “Templates”, los cuales por medio del agente o el servicio de SNMP facilita la obtención y monitoreo del status de estos mismos. Estos templetes son una colección de ITEMS, TRIGGERS, GRAPHS entre otras cosas, diseñadas especialmente para ciertos dispositivos; para el caso de este proyecto, los templetes que se utilizaron fueron los siguientes:&nbsp;<br><br><strong>-&nbsp;&nbsp;Linux by Zabbix Agent (Monitoreo de Servidores Debian en máquinas del laboratorio)</strong><br><strong>-&nbsp;&nbsp;App RADIUS Service (Monitoreo de Servicio freeRadius)</strong><br><strong>-&nbsp;&nbsp;Linux SNMP (Monitoreo de Servidor de DO y pfSense)</strong><br><strong>-&nbsp;&nbsp;App Axigen-Services (Monitoreo de Axigen (Para servicios POP3, IMAP, SMTP))</strong><br></p>
+                            <h4 class="card-title">Configuración de Zabbix Appliance&nbsp;<br></h4>
+                            <p>Como el primer paso para poder configurar el Appliance de Zabbix, es descargar esta misma de los repositorios de Zabbix, e instalarla en la plataforma de virtualización virtual box. </p><img src="assets/img/zabbix/ConfiguracionZabbix_Page_02_Image_0001.png" style="width: 90%;">
+                            <p>Una vez descarga, si importa el appliance a VirtualBox. Y re realizan las modificaciones de red necesarias. En este caso se establece la red estática predefinida en el documento del proyecto final, modificando el siguiente archivo de configuración y asignando los parámetros de “IPADDR”, “NETMASK”, “GATEWAY” y “DNS1” correspondientes, como se puede ver a continuación </p><img src="assets/img/zabbix/ConfiguracionZabbix_Page_03_Image_0001.png" style="width: 80%;">
+                            <p>Una vez hechos estos cambios, se deben reiniciar los servicios de red para que los cambios se vean reflejados. Para confirmar que los cambios hallan surgido efecto, se corre el comando ip addr y se verifica que la IP que se configuro, se muestre en el adaptador de red indicado. </p><img src="assets/img/zabbix/ConfiguracionZabbix_Page_03_Image_0002.png" style="width: 80%;">
+                            <p>Ya con este cambio realizado, la interfaz web de Zabbix puede ser accessada por medio de esta IP introdujendola en el navegador de la siguiente manera: <strong>http://10.32.1.70 </strong></p><img src="assets/img/zabbix/ConfiguracionZabbix_Page_04_Image_0001.png" style="width: 80%;">
+                            <p>Las credenciales de acceso del WEB UI: User: <strong>Admin </strong>Password: <strong>zabbix</strong><br>Las credenciales de acceso del CLI: User: <strong>root </strong>Password: Zabbix<br>Una vez realizado esto, el appliance ya quedo configurado. Lo siguiente es la instalación de agentes oservicio SNMP para el monitoreo de los hosts que se deseen monitorear<br></p>
+                            <h4 class="card-title">Instalacion Zabbix Agent en Debian 10<br></h4>
+                            <p>Para la instalación de agentes de Zabbix en los servidores de Debian 10 de las maquinas virtuales de las computadoras del laboratorio se utilizó la siguiente guía como referencia (se requirió hacer algunos ajustes):<br><br>https://computingforgeeks.com/how-to-install-zabbix-agent-on-debian-linux/<br><br>Paso #1: Añadir repositorio de Zabbix<br><br>Para añadir el repositorio de donde se instalara el agente, se corre el siguiente comando (como super user / root user): <br><code><br>wget https://repo.zabbix.com/zabbix/5.4/debian/pool/main/z/zabbix-release/ zabbix-release_5.4-1+debian10_all.deb<br><br></code>Lo siguiente es instalar el repositorio de la siguiente manera:<br><code>dpkg -i zabbix-release_5.4-1+debian10_all.deb</code><br>Paso #2: Instalación de Agente de Zabbix<br><br>El servidor de Zabbix utiliza a los agentes o el servicio de SNMP para monitorear sus clientes.<br><br>Para instalar el agente en Debian Linux se ejecutan los siguientes comandos.<br><code>apt update<br>apt install Zabbix-agent<br></code><br>Se inicia y habilita el agente:<br><code>systemctl enable zabbix-agent<br>systemctl start zabbix-agent<br></code>Paso #3: Configurar Agente de Zabbix<br><br>Se abre el archivo de configuración del agente y se modifian por lo menos la siguientes líneas (se pone la dirección de tu servidor de Zabbix y se le da un nombre a este host)<br><br></p><img src="assets/img/zabbix/ConfiguracionZabbix_Page_05_Image_0001.png" style="width: 80%;">
+                            <p>Paso #4: Permitir puertos de listening en el firewall<br><br>Se abren los puertos 10050 y 10051 en el firewall de preferencia</p>
+                            <h4 class="card-title">Configuración de Hosts en el servidor de Zabbix<br></h4>
+                            <p>1.Se accede a la interfaz de web de tu servidor de Zabbix.<br>2.Bajo la pestaña de configuración del lado derecho, se selecciona “Hosts”.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_06_Image_0002.png">
+                            <p>3.En la parte superior derecha se selecciona “Create Host”</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_07_Image_0001.png">
+                            <p>4.Se introduce la información correspondiente. Importante que el “Host Name” sea el mismoque se puso en el archivo de configuración.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_07_Image_0002.png">
+                            <p>5.Una vez finalizada la configuración, se le da en el botón de “Add”. Y se verán todos loshosts dados de alta en el servidor de Zabbix.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_07_Image_0003.png">
+                            <p>Al estar el “status” en verde, significa que el agente/servicio SNMP esta funcionando correctamente.</p>
+                            <h4 class="card-title">Templetes a los Hosts<br></h4>
+                            <p>Para añadir un templete de los ítems que se van a monitorear a uno de los hosts, se selecciona el host, y se va a la pestaña de “Templates”.</p><img src="assets/img/zabbix/ConfiguracionZabbix_Page_08_Image_0001.png" style="width: 80%;">
+                            <p>Una vez en la pantalla de “Templates” se busca y selecciona el templete correspondiente. En el caso de los servidores de Debian, el templete a utilizar fue “Linux by Zabbix Agent”.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_08_Image_0002.png">
+                            <p>Se actualiza, y listo, el host ya se encuentra conectado y tiene la lista de ITEMS que van a ser monitoreados.</p>
+                            <h4 class="card-title">Notificación de Generación de Alarma por medio de Telegram<br></h4>
+                            <p>Configuración en Telegram<br>1.Crear un bot en Telegram por medio de @botfather</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_09_Image_0001.png">
+                            <p>2.Inicializar el bot creado, para poder habilitar el poder recibir mensaje.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_10_Image_0001.png">
+                            <p>3.Crear el Grupo a donde se recibirán las alertas (El grupo tiene que ser público, y tener alBot creado como administrador). Y inicializar al bot en este chat.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_11_Image_0001.png"><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_11_Image_0002.png">
+                            <p>4.Obtener el Group ID, a donde se enviaran los mensajes (Este será utilizado en el Servidorde Zabbix cuando se configure el servicio de Telegram).<br><br>Configuración en Zabbix<br><br>1.Descargar el siguiente archivo, e importarlo a Zabbix (Administration &gt;Media Types &gt;Import).<br><br>https://wee3bsvqod3svu3xhsudavsoem-ac4c6men2g7xr2a-blog-programs74-ru.translate.goog/how-to-send-message-from-zabbix-to-telegram-via-webhook/#</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_12_Image_0001.png">
+                            <p>2.Una vez importado, proceder a editar el “Media Type” recién importado, oara cambiar elparámetro de “Token” y asignar el token obtenido en la parte de configuración en Telegram.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_12_Image_0002.png">
+                            <p>3.Añadir los “Message Templates” necesarios, y guardar los cambios.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_13_Image_0001.png">
+                            <p>4.Realizar una prueba de tu “Media Type” para verificar funcionamiento.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_13_Image_0002.png">
+                            <p>5.Finalmente se requiere configurar el método de notificación para el usuario. Ir aAdministration &gt;&gt; Users &gt;&gt; **Seleccionar Usuario que recibirá estas notificaciones** &gt;&gt;Media &gt;&gt; Add</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_14_Image_0001.png">
+                            <p>6.Listo, ahora ya quedo configurada la notificación de Alarmas por medio de Telegram, paralas alertas configuradas en el servidor de Zabbix.</p>
+                            <h4 class="card-title">Configuración de Notificaciones por Correo Electrónico<br></h4>
+                            <p>1.Al igual que la configuración de Telegram, se va a Administration &gt;&gt; Media Types &gt;&gt;Email</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_14_Image_0002.png">
+                            <p>2.Se editan los parámetros, agregando tu servidor SMTP, el puerto, el correo electrónico dedonde se enviaran las notificaciones/alarmas, y el método de autenticación (en nuestrocaso, usuario y contraseña).</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_15_Image_0001.png">
+                            <p>3.Se guardan los cambios, y se puede realizar una prueba de funcionalidad.</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_16_Image_0001.png">
+                            <p>4.Finalmente, al igual que con Telegram, se tiene que añadir este servicio de correo alusuario(s) que recibirá estas alarmas.<br><br>Administration &gt;&gt; Users &gt;&gt; **Seleccionar Usuario que recibirá estas notificaciones** &gt;&gt;Media &gt;&gt; Add</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_16_Image_0002.png">
+                            <p>5.De esta manera quedan configuradas las alarmas por medio de correo electrónico.</p>
+                            <h4 class="card-title">Visualizar Status/Servicios de los Host<br></h4>
+                            <p>Ir a la pestaña de Monitoring &gt;&gt; Hosts y seleccionar el host del que se quieren ver el status. Se presentaran varias opciones de visualización:<br><br>1.Latest Data – Se visualizaran los datos RAW de todos los ITEMS que se esténmonitoreando de dichos hosts.<br><br>2.Problems – Se mostraran las alertas que tengan que ver con el hosts (desconexión, servicioscaídos, alto uso de memoria, poco espacio en disco, etc).<br><br>3.Graphs – Manera grafica de representar ciertas estadísticas de los hosts (Memoria, Uso deCPU, Ancho de Banda, etc).<br><br>Ejemplo de “Latest Data” en host Debian</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_17_Image_0001.png">
+                            <p>Ejemplo “Problems” en hosts</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_17_Image_0002.png">
+                            <p>Ejemplo “Problems” en hosts</p><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_18_Image_0001.png"><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_18_Image_0002.png"><img style="width: 80%;" src="assets/img/zabbix/ConfiguracionZabbix_Page_18_Image_0003.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>

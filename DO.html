@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blank Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>rEDES</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa fa-child"></i><span>Introducción</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="http_dns.html"><i class="fa fa-internet-explorer"></i><span>WEB, DHCP, DNS</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="https_cert.html"><i class="fas fa-table"></i><span>HTTPS</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="DO.html"><i class="fas fa-window-maximize"></i><span>DO1/DO2&nbsp;</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="blank.html"><i class="fa fa-tachometer"></i><span>PRTG</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="Zabbix.html"><i class="fa fa-tachometer"></i><span>ZABBIX</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
+                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
+                </nav>
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Instalación en <em>Debian GNU/Linux </em>de los servicios en DO1/DO2:&nbsp;<br></h4>
+                            <h6 class="text-muted card-subtitle mb-2"></h6>
+                            <p class="card-text">Para esta parte del proyecto fue necesario configurar dos servidores Debian de Digital Ocean que contasen con IPs públicas, para poder alojar servicios Web así como de correo electrónico. Al igual que en los servidores locales de las redes 10.31.1.0/4 y 10.32.1.0/24, se utilizó NGINX para alojar las paginas web tanto publicas (HTTP) como privadas (HTTPS). El servidor Debian DO1 (165.232.148.20) se conecta a la red izquierda mientras que el servidor DO2 (165.232.129.117) se conecta a la red derecha. La pagina web publica de cada equipo (DO1 y DO2) esta disponible para cualquier equipo (interno o externo a la red del proyecto) que cuente con internet, mientras que la pagina privada&nbsp;(HTTPS) solo se encuentra disponibles para los respectivos equipos de cada red. Las paginas web tanto HTTP como HTTPS alojan este reporte.<br><br>&nbsp;&nbsp;El servidor DNS fue configurado para que cada servidor DO, alojara un dominio especifico tal como lo es izq.cetys.info para el DO1 y der.cetys.info para el DO2, cada registro fue configurado en un DNS publico de IP 158.122.64.9, este DNS publico sirve com DNS primario de los DNS DBIN9 instalados en DO1 y DO2, con el propósito de que cualquier cambio realizado en los registros del DNS publico se vea reflejado en el DNS interno de cada servidor DO. Los registros en el servidor DNS publico se dan de la siguiente forma tomando como ejemplo el servidor izquierdo.<br></p><img style="width: 80%;" src="assets/img/DO1.png">
+                            <p class="card-text"><br>Cabe recalcar que los registros DMARK, SPF y DKIM, permiten una transmisión de mensajes segura y eficiente a la hora de implementar el servicio de correo electrónico para cada dominio (izq.cetys.info y der.cetys.info).<br><br>&nbsp;&nbsp;Una vez se ha configurado el DNS publico y ambos servidores Debian de DO son DNS slaves del publico, es posible continuar a configurar el sevicio de correo electrónico utilizando el ampliando Axigen el cual facilita la integración de diferentes protocolos de coreo electrónico como SMTP, POP3, IMAP, así como sus respectivas versiones seguras.&nbsp;<br><br><br>La configuraión general del servidor de correo se lleva a cabo mediante el WebAdmin de cada servidor el cual se acceso por medio del puerto 9443 (Ejemplo. 165.232.149.20:9443) en cualquier navegador web, lo cual facilita mucho la configuración de dominios, y la gestión de usuarios. La siguiente imagen muestra la imagen inicial del WebAdmin del servidor derecho.<br><br></p><img style="width: 80%;" src="assets/img/4.png">
+                            <p>Para cada domino @izq.cetys.info y @der.cetys.info se crearon los usuarios asr1, asr2 y asr3 todos con contraseña “admred$”, se habilitaron los servicios requeridos como se muestra en la siguiente figura.<br><br></p><img style="width: 80%;" src="assets/img/5.png">
+                            <p>Una vez las configuraciones mencionadas se llevaron a cabo, se procedió a verificar la interfaz Webmail para enviar correo y revisar correos recibidos. Esta interfaz se accede por medio de wmail.izq.cetys.info o wmail.der.cetys.info, como se muestra a continuación para el dominio der.cetys.info y para el usuario asr1.<br></p><img style="width: 80%;" src="assets/img/6.png">
+                            <p>La funcionalidad del servidor se pudo corroborar al enviar y recibir correo a cuentas externas pertenecientes a otros dominios, así como a cuantas registradas en el mismo servidor.<br><br>Finalmente, para corroborar el funcionamiento de los protocolo IMAP y POP3, se procedió a instalar clientes de correo electrónico como lo es Thunderbird para verificar que en efecto un cliente externo puede hacer uso de la cuenta de correo para poder enviar y recibir correo. A continuación se muestra el ejemplo del usuario asr1@der.cetys.info, para que este pueda enviar y recibir correo de manera efectiva desde un cliente de correo (Thunderbird). La configuración inicial debe de ser manual como se muestra a continuación.<br><br></p><img style="width: 80%;" src="assets/img/7.png">
+                            <p>Una vez presionando el botón “Done”, aparecerá la siguiente ventana para advertir que no se tiene total seguridad, lo cual es esperado pues se probaran los protocolos IMAP y POP3, para continuar presionar el botón “Confirm Security Exception”<br></p><img style="width: 80%;" src="assets/img/8.png">
+                            <p>Una vez se busca enviar un correo, se especifica la dirección, se ingresa la contraseña e igualmente se presiona el botón “Confirm Security Exception” para proceder al envío. NOTA: la ventana donde aparece el botón “Confirm Security Exception” solo aparece la primera vez que se realiza el procedimiento.<br></p><img style="width: 80%;" src="assets/img/9.png">
+                            <p>Los mensajes recibidos se pueden ver presionando el botón get messages que se encuentra en la esquina superior izquierda.<br></p><img style="width: 80%;" src="assets/img/10.png"><a class="card-link" href="#">Link</a><a class="card-link" href="#">Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
