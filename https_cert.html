@@ -16,7 +16,7 @@
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-network-wired"></i></div>
                     <div class="sidebar-brand-text mx-3"><span>rEDES</span></div>
                 </a>
                 <hr class="sidebar-divider my-0">
@@ -25,7 +25,7 @@
                     <li class="nav-item"><a class="nav-link" href="http_dns.html"><i class="fa fa-internet-explorer"></i><span>WEB, DHCP, DNS</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="https_cert.html"><i class="fas fa-table"></i><span>HTTPS</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="DO.html"><i class="fas fa-window-maximize"></i><span>DO1/DO2&nbsp;</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="blank.html"><i class="fa fa-tachometer"></i><span>PRTG</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="PRTG.html"><i class="fa fa-tachometer"></i><span>PRTG</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="Zabbix.html"><i class="fa fa-tachometer"></i><span>ZABBIX</span></a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
@@ -33,11 +33,20 @@
         </nav>
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle mr-3" id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button></div>
-                </nav>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-1">Blank Page</h3>
+                    <h3 class="text-dark mb-4" style="padding: 0px;padding-top: 12px;">HTTPS</h3>
+                    <div class="card">
+                        <div class="card-body"><img src="assets/img/HTTPSa/zeroSSL.png">
+                            <p class="card-text">Para poder proporcionar un servicio https seguro se requiere de una certificación SSL, con un host o un servicio que de dichos certificados. En este caso se utilizo ZeroSSL ya que provee un servicio de SSL gratis por 90 días. Para iniciar se creo una cuenta y se tuvo que hacer una verificación de que el dominio es de nosotros (para esto ya se vinculo der.cetys.info y izq.cetys.info con las IP’s de nuestros DO’s). La verificación consiste en subir una llave en nuestro servidor HTTP con una dirección especifica para que el servicio de SSL pueda verificar que tenemos acceso a manipular la página web.</p><img src="assets/img/HTTPSa/zerossl1.png" style="width: 80%;">
+                            <p class="card-text">Al tener lista la verificación se puede descargar el certificado root, la llave privada y el certificado intermedio, que se tienen que cargar al servidor HTTP/HTTPS para que el usuario pueda consultar el certificado y verificar la seguridad de la página. </p><img src="assets/img/HTTPSa/cert.png" style="width: 20%;">
+                            <p class="card-text">Para NGINX se tiene que concatenar el certificado root con el certificado intermedio, para maximizar la compatibilidad de diferentes browsers. Para hacer esto en Linux se tiene que correr el siguiente código: </p><code>cat certificate.crt ca_bundle.crt &gt;&gt; certificate.crt</code>
+                            <h5 class="card-title">NGINX</h5>
+                            <p class="card-text">Para poder habilitar el servicio de HTTPS en el servicio web ya existente en NGINX se tiene que hablitira otro servidor que este escuchando al puerto de HTTPS que en este caso es 443. Así que se crea un servidor que conozca el destino del certificado root y la llave privada para que el cliente pueda consultarlo y verificar la autenticidad de la página. </p><code>server {<br>listen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 443 ssl;<br>&nbsp;&nbsp;ssl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;on;<br>&nbsp;&nbsp;ssl_certificate&nbsp;&nbsp;&nbsp;/etc/ssl/certificate.crt;&nbsp;<br>&nbsp;&nbsp;ssl_certificate_key&nbsp;/etc/ssl/private.key;<br>&nbsp;&nbsp;server_name&nbsp;izq.cetys.info;<br>&nbsp;&nbsp;location&nbsp;&nbsp; / {<br>&nbsp;&nbsp;root&nbsp;&nbsp;&nbsp;&nbsp; /srv/www/;<br>&nbsp;&nbsp;index&nbsp;&nbsp;&nbsp;&nbsp;index.html;<br>&nbsp;&nbsp;}<br>}<br><br></code>
+                            <h5 class="card-title">Pruebas</h5>
+                            <p class="card-text">Al ingresar a la pagina https://in.izq.cetys.info se puede ver el candado que demuestra que esta pagina efectivamente tiene un certificado y tiene una comunicación segura. </p><img src="assets/img/HTTPSa/secure.png" style="width: 20%;">
+                            <p class="card-text">Al ingresar a la pagina https://in.izq.cetys.info se puede ver el candado que demuestra que esta pagina efectivamente tiene un certificado y tiene una comunicación segura. </p><img src="assets/img/HTTPSa/secure2.png" style="width: 50%;">
+                        </div>
+                    </div>
                 </div>
             </div>
             <footer class="bg-white sticky-footer">

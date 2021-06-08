@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blank Page - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
+            <div class="container-fluid d-flex flex-column p-0"><a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-network-wired"></i></div>
+                    <div class="sidebar-brand-text mx-3"><span>rEDES</span></div>
+                </a>
+                <hr class="sidebar-divider my-0">
+                <ul class="navbar-nav text-light" id="accordionSidebar">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fa fa-child"></i><span>Introducción</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="http_dns.html"><i class="fa fa-internet-explorer"></i><span>WEB, DHCP, DNS</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="https_cert.html"><i class="fas fa-table"></i><span>HTTPS</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="DO.html"><i class="fas fa-window-maximize"></i><span>DO1/DO2&nbsp;</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="PRTG.html"><i class="fa fa-tachometer"></i><span>PRTG</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="Zabbix.html"><i class="fa fa-tachometer"></i><span>ZABBIX</span></a></li>
+                </ul>
+                <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+                <div class="container-fluid">
+                    <h3 class="text-dark mb-1">PRTG</h3>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Introducción&nbsp;</h4>
+                            <h6 class="text-muted card-subtitle mb-2">Subtitle</h6>
+                            <p class="card-text">PRTG es un programe que te permite monitorear dispositivos y servicios en la red para ver el estado de una compnaia o una red en si.&nbsp;<br> Lo que se busco monitorear por medio de [rtg fue lo siguiente:<br>-Uptime<br>-Uso de CPU<br>-Memoria disponible<br>-Espacio en disco disponible<br>-Trafico de cada adaptador de red (Ancho de banda).<br><br>También se lleva a cabo un monitoreo de los siguientes servicios (si es aplicable para dicho host):&nbsp;<br>-HTTP<br>-SSH<br>-HTTPS<br>-DNS<br>-freeRadius<br>-SMTP<br>-POP3<br>-IMAP<br></p>
+                            <h4 class="card-title">Configuración <br></h4>
+                            <p class="card-text">Para poder monitorear estos servicios se tiene que registra los dispositivos a medir para ello se tiene que identificar los IP de cada equipo, y registrarlo como new device.&nbsp;<br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG1.png">
+                            <p class="card-text">Dependiendo del equipo y de que servicios tiene se tendrá que agregar los sensores correctos, para esto se tiene que saber si la maquina que se va a monitorear tiene SNMP o que puertos puede revisar. Una vez teniendo esta información se crea un sensor como se demuestra en la imagen. <br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG2.png">
+                            <p class="card-text">Cada sensor tiene sus configuraciones únicas ya que depende de que servicio se esta monitoreando. Para los servicios que se van a monitorear por SNMP se tienen que configurar para que el community-string sea el mismo que el del agente. Una vez que todo este configurado el portal principal te va a indicar si el servicio se esta monitoreando o si esta en estado de DOWN: <br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG3.png">
+                            <p class="card-text">Se realizo lo mismo para todos los dispositivos que se tienen que monitorear para asegurar que estén funcionando y operando bien. El portal inicial va a indicar que sensores están activos o si hay alguna alarma y nos permite tomar acción. <br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG4.png">
+                            <h4 class="card-title">Notification Triggers<br></h4>
+                            <p class="card-text">Un notification trigger nos permite tomar una acción si existe algún problema con uno de los dispositivos que se están monitoreando, para ello se tiene que hacer una condición para cumplir con los requisitos. En este caso se configuro los servicios de telegram y de correo.&nbsp;<br>Para la configuración de correo se ingreso la cuenta que esta montada en DO haciendo un relay directamente al STMP. Se configuro de la siguiente manera:<br><br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG5.png">
+                            <p class="card-text">Al tener un método de como mandar correos se pudo configurar a los usuarios que se le mandaría correo, donde en este caso fue para todos los administradores de internet y monitoreo.&nbsp;<br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG6.png">
+                            <p class="card-text">Para mandar mensajes por telegram se configuro via un HTTP action via el método POST, donde se ingresa el token del bot y se le ordena a mandar un mensaje con una estructura especifica donde PRTG llena las variables con los datos correctos.<br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG7.png">
+                            <p class="card-text">Para generar las alarmas se crearon condiciones y triggers para que permita hacer una acción en dado caso si varias condiciones se cumplen. En este caso se crearon dos triggers uno cuando se cae un sensor y otro cuando supera el ancho de banda delimitado por mas de cierto tiempo. La configuración fue la siguiente: <br></p><img style="width: 80%;" src="assets/img/PRTGA/PRTG8.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © Brand 2021</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
